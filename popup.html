@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Comment Analyzer</title>
+  <style>
+    /* Global Styles: Dark Theme Base (No changes from previous) */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      padding: 15px;
+      background-color: #121212; 
+      color: #e0e0e0; 
+      margin: 0;
+      box-sizing: border-box;
+      width: 350px; 
+    }
+    h1 {
+      font-size: 22px;
+      color: #00bcd4; 
+      border-bottom: 2px solid #00bcd4;
+      padding-bottom: 5px;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    /* Section Headers (No changes from previous) */
+    .section-title {
+      font-weight: 600; 
+      color: #00bcd4; 
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border-left: 4px solid #00bcd4;
+      padding-left: 8px;
+    }
+    /* Main output text styling (No changes from previous) */
+    #output p {
+      margin: 5px 0;
+      line-height: 1.4;
+      font-size: 14px;
+    }
+    /* Metrics Styling (No changes from previous) */
+    .metrics-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px; 
+    }
+    .metric {
+      width: calc(50% - 5px); 
+      background-color: #1e1e1e; 
+      padding: 12px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+      border-top: 3px solid transparent; 
+      transition: all 0.2s;
+    }
+    .metrics-container > .metric:last-child {
+        border-top: 3px solid #4CAF50; 
+    }
+    .metric-title {
+      font-size: 12px;
+      color: #9e9e9e; 
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    .metric-value {
+      font-size: 24px; 
+      font-weight: 700; 
+      color: #ffffff;
+    }
+    /* Image and Chart Styling (No changes from previous) */
+    img {
+      width: 100%;
+      height: auto;
+      margin-top: 15px;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    /* Comment List Styling (No changes from previous) */
+    .comment-list {
+      list-style: none;
+      padding: 0;
+      max-height: 300px; 
+      overflow-y: auto;
+      border: 1px solid #333;
+      border-radius: 4px;
+    }
+    .comment-list::-webkit-scrollbar {
+        width: 8px;
+    }
+    .comment-list::-webkit-scrollbar-thumb {
+        background-color: #555;
+        border-radius: 4px;
+    }
+    .comment-item {
+      margin: 0;
+      padding: 10px;
+      border-bottom: 1px solid #222;
+      font-size: 13px;
+    }
+    .comment-item:last-child {
+      border-bottom: none;
+    }
+    .comment-sentiment {
+      font-weight: 600;
+      margin-top: 5px;
+      display: block;
+    }
+    .comment-sentiment[data-sentiment="1"] { color: #4CAF50; }
+    .comment-sentiment[data-sentiment="0"] { color: #FFC107; }
+    .comment-sentiment[data-sentiment="-1"] { color: #F44336; }
+
+    /* ----------------------------------- */
+    /* NEW: Loading Spinner Styles */
+    /* ----------------------------------- */
+    .loader-container {
+        display: none; /* Hidden by default */
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+    }
+    .loader {
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        border-top: 4px solid #00bcd4; /* Cyan/Teal color */
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 10px auto;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .loader-text {
+        color: #e0e0e0;
+        font-size: 14px;
+        font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <h1>YouTube Comment Analyzer</h1>
+
+  <div id="loader-container" class="loader-container">
+    <div class="loader"></div>
+    <div id="loader-message" class="loader-text">Fetching comments...</div>
+  </div>
+  
+  <div id="output" class="section"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
